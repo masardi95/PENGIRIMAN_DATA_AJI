@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="localku" id="Project_18d3639" database="MySql" >
+	<schema name="kirimdata" >
+		<table name="kantor" >
+			<options><![CDATA[engine=InnoDB]]></options>
+			<column name="id_kantor" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="nama_kantor" type="varchar" length="50" jt="12" />
+			<column name="alamat_kantor" type="varchar" length="150" jt="12" />
+			<column name="email_kantor" type="varchar" length="30" jt="12" />
+			<column name="logo" type="varchar" length="50" jt="12" />
+			<index name="pk_kantor_id_kantor" unique="PRIMARY_KEY" >
+				<column name="id_kantor" />
+			</index>
+		</table>
+		<table name="product" >
+			<options><![CDATA[engine=InnoDB]]></options>
+			<column name="id_product" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="id_vendor" type="int" jt="4" mandatory="y" />
+			<column name="nama_product" type="varchar" length="50" jt="12" />
+			<column name="ukuran" type="varchar" length="20" jt="12" />
+			<column name="bahan" type="varchar" length="20" jt="12" />
+			<column name="deleted" type="int" jt="4" >
+				<defo>0</defo>
+			</column>
+			<column name="harga" type="double" jt="8" />
+			<index name="pk_product_id_product" unique="PRIMARY_KEY" >
+				<column name="id_product" />
+			</index>
+			<index name="fk_product_vendor" unique="NORMAL" >
+				<column name="id_vendor" />
+			</index>
+			<fk name="fk_product_vendor" to_schema="kirimdata" to_table="vendor" >
+				<fk_column name="id_vendor" pk="id_vendor" />
+			</fk>
+		</table>
+		<table name="transaksi" >
+			<options><![CDATA[engine=InnoDB]]></options>
+			<column name="id_transaksi" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="id_user_kantor" type="int" jt="4" mandatory="y" >
+				<comment><![CDATA[siapa yg ngirim]]></comment>
+			</column>
+			<column name="id_vendor" type="int" jt="4" mandatory="y" />
+			<column name="id_user_vendor" type="int" jt="4" >
+				<comment><![CDATA[yang menerimaa pesanan]]></comment>
+			</column>
+			<column name="id_product" type="int" jt="4" mandatory="y" />
+			<column name="no_transaksi" type="varchar" length="25" jt="12" />
+			<column name="tgl_kirim" type="datetime" jt="93" >
+				<defo>current_timestamp()</defo>
+			</column>
+			<column name="tgl_proses" type="datetime" jt="93" />
+			<column name="tgl_pelunasan" type="datetime" jt="93" />
+			<column name="tgl_acc" type="datetime" jt="93" />
+			<column name="nama_gambar" type="varchar" length="50" jt="12" />
+			<column name="nama_file" type="varchar" length="50" jt="12" />
+			<column name="jumlah" type="int" jt="4" />
+			<column name="harga" type="double" jt="8" >
+				<comment><![CDATA[harga di isi saat transaksi]]></comment>
+			</column>
+			<column name="keterangan" type="varchar" length="200" jt="12" />
+			<column name="status" type="varchar" length="150" jt="12" />
+			<column name="tgl_selesai" type="datetime" length="19" decimal="0" jt="93" />
+			<column name="bukti_pembayaran" type="varchar" length="30" decimal="0" jt="12" />
+			<column name="link_external" type="varchar" length="150" jt="12" />
+			<index name="pk_traksaksi_id_transaksi" unique="PRIMARY_KEY" >
+				<column name="id_transaksi" />
+			</index>
+			<index name="fk_traksaksi_product" unique="NORMAL" >
+				<column name="id_product" />
+			</index>
+			<index name="fk_traksaksi_user_kantor" unique="NORMAL" >
+				<column name="id_user_kantor" />
+			</index>
+			<index name="fk_traksaksi_user_vendor" unique="NORMAL" >
+				<column name="id_user_vendor" />
+			</index>
+			<fk name="fk_traksaksi_user_vendor" to_schema="kirimdata" to_table="user_vendor" >
+				<fk_column name="id_user_vendor" pk="id_user_vendor" />
+			</fk>
+			<fk name="fk_traksaksi_product" to_schema="kirimdata" to_table="product" >
+				<fk_column name="id_product" pk="id_product" />
+			</fk>
+			<fk name="fk_transaksi_user_kantor" to_schema="kirimdata" to_table="user_kantor" >
+				<fk_column name="id_user_kantor" pk="id_user_kantor" />
+			</fk>
+		</table>
+		<table name="user_kantor" >
+			<options><![CDATA[engine=InnoDB]]></options>
+			<column name="id_user_kantor" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="id_kantor" type="int" jt="4" />
+			<column name="nama_user_kantor" type="varchar" length="60" jt="12" />
+			<column name="username" type="varchar" length="10" jt="12" mandatory="y" />
+			<column name="password" type="varchar" length="70" jt="12" />
+			<column name="alamat" type="varchar" length="100" jt="12" />
+			<column name="deleted" type="int" jt="4" >
+				<defo>0</defo>
+			</column>
+			<column name="level_kantor" type="int" length="10" decimal="0" jt="4" mandatory="y" >
+				<defo>1</defo>
+			</column>
+			<index name="pk_tbl_id_user" unique="PRIMARY_KEY" >
+				<column name="id_user_kantor" />
+			</index>
+			<index name="fk_user_kantor_kantor" unique="NORMAL" >
+				<column name="id_kantor" />
+			</index>
+			<fk name="fk_user_kantor_kantor" to_schema="kirimdata" to_table="kantor" >
+				<fk_column name="id_kantor" pk="id_kantor" />
+			</fk>
+		</table>
+		<table name="user_vendor" >
+			<options><![CDATA[engine=InnoDB]]></options>
+			<column name="id_user_vendor" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="id_vendor" type="int" jt="4" mandatory="y" />
+			<column name="nama_user_vendor" type="varchar" length="30" jt="12" />
+			<column name="username" type="varchar" length="10" jt="12" />
+			<column name="deleted" type="int" jt="4" >
+				<defo>0</defo>
+			</column>
+			<column name="password" type="varchar" length="60" decimal="0" jt="12" />
+			<column name="level_vendor" type="int" length="10" decimal="0" jt="4" mandatory="y" >
+				<defo>1</defo>
+			</column>
+			<index name="pk_user_vendor_id_user_vendor" unique="PRIMARY_KEY" >
+				<column name="id_user_vendor" />
+			</index>
+			<index name="fk_user_vendor_vendor" unique="NORMAL" >
+				<column name="id_vendor" />
+			</index>
+			<fk name="fk_user_vendor_vendor" to_schema="kirimdata" to_table="vendor" >
+				<fk_column name="id_vendor" pk="id_vendor" />
+			</fk>
+		</table>
+		<table name="vendor" >
+			<options><![CDATA[engine=InnoDB]]></options>
+			<column name="id_vendor" type="int" jt="4" mandatory="y" autoincrement="y" />
+			<column name="nama_vendor" type="varchar" length="50" jt="12" />
+			<column name="email_vendor" type="varchar" length="50" jt="12" />
+			<column name="alamat_vendor" type="varchar" length="100" jt="12" />
+			<column name="deleted" type="int" jt="4" >
+				<defo>0</defo>
+			</column>
+			<index name="pk_vendor_id_vendor" unique="PRIMARY_KEY" >
+				<column name="id_vendor" />
+			</index>
+		</table>
+	</schema>
+	<connector name="localku" database="MySql" driver_class="com.mysql.jdbc.Driver" driver_jar="mysql-connector-java-8.0.18.jar" driver_desc="Standard" host="localhost" port="3306" instance="kirimdata" user="root" />
+	<layout name="Default Layout" id="Layout_1e620a7" show_relation="columns" >
+		<comment><![CDATA[skema]]></comment>
+		<entity schema="kirimdata" name="kantor" color="C1D8EE" x="48" y="288" />
+		<entity schema="kirimdata" name="product" color="3986C1" x="304" y="480" />
+		<entity schema="kirimdata" name="transaksi" color="C1D8EE" x="576" y="48" />
+		<entity schema="kirimdata" name="user_kantor" color="C1D8EE" x="48" y="48" />
+		<entity schema="kirimdata" name="user_vendor" color="C1D8EE" x="304" y="48" />
+		<entity schema="kirimdata" name="vendor" color="C1D8EE" x="304" y="272" />
+	</layout>
+</project>
