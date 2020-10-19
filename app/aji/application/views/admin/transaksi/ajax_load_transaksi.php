@@ -23,11 +23,7 @@
                           <img src="<?php echo site_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar; ?>" width="100px">
                         </td>  
                         <td><?php echo $dt->nama_vendor; ?></td>                      
-                        <td>
-                          <?php 
-                            echo $dt->status;
-                          ?>
-                        </td>                      
+                        <td><?php echo $dt->status; ?></td>                      
                         <td><?php echo $dt->keterangan ?></td>                      
                         <td><?php echo $dt->jumlah ?></td>                      
                         <td><?php echo $dt->nama_product ?></td>                      

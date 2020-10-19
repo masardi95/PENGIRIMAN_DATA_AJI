@@ -60,6 +60,7 @@ class Transaksi extends CI_Controller {
 			'jumlah' 			=> $this->input->post('jumCetak'),
 			'keterangan'	 	=> $this->input->post('ket'),
 			'link_external'	 	=> $this->input->post('linkExternal'),
+			'status'			=> 'Dikirim'
 		);
 
 		// konfig file upload

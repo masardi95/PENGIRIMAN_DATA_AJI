@@ -93,13 +93,19 @@
                         </div>
                         <div class="col-md-4">
                           <div class="form-group">
-                            <select id="pilihCetak" required>
+                            <input type="radio" class="pilihan" name="pilihan" value="file" checked> File
+                            <input type="radio" class="pilihan" name="pilihan" value="link"> Link
+                            <br>
+                            <input type="text" class="form-control" name="linkExternal" id="linkExternal" style="display: none;">
+                            <input type="file" name="fileMentah" id="fileMentah"  accept=".cdr, .psd, .ai">
+                        
+                            
+                            
+                            <!-- <select id="pilihCetak" required>
                               <option value="" selected disabled>~~ Pilih Type Upload File ~~</option>
                               <option value="link">Link external</option>
                               <option value="file">Upload File</option>
-                            </select>
-                            <input type="file" name="fileMentah" id="fileMentah"  accept=".cdr, .psd, .ai" style="display: none;">
-                            <input type="text" class="form-control" name="linkExternal" id="linkExternal" style="display: none;">
+                            </select> -->
                           </div>
                         </div>
                       </div>
@@ -183,6 +189,17 @@
     }
 
     $('#pilihCetak').change(function(e) {
+      if ($(this).val() == 'link') {
+        $('#linkExternal').show();
+        $('#fileMentah').hide().prop('required',false);
+      }else{
+        $('#linkExternal').hide();
+        $('#fileMentah').show();
+      }
+    });
+
+
+    $('.pilihan').change(function(e) {
       if ($(this).val() == 'link') {
         $('#linkExternal').show();
         $('#fileMentah').hide().prop('required',false);
