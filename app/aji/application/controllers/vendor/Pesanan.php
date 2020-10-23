@@ -22,6 +22,8 @@ class Pesanan extends CI_Controller {
 	    }
 	}
 
+
+	// tampilan dashboard vendor
 	public function index()
 	{
 		$data = array(
@@ -32,6 +34,7 @@ class Pesanan extends CI_Controller {
 		$this->load->view('vendor/dashboard', $data);
 	}
 
+	// tampilan awal pesanan yang masuk dari kantor ke vendor
 	public function in()
 	{
 		// $idUser = $this->session->userdata('idUser');
@@ -44,6 +47,7 @@ class Pesanan extends CI_Controller {
 		$this->load->view('vendor/pesanan/in', $data);
 	}
 
+	// tampilan pesanan yang sudah di proses oleh vendor
 	public function onprog()
 	{
 		$data = array(
@@ -54,6 +58,8 @@ class Pesanan extends CI_Controller {
 		$this->load->view('vendor/pesanan/onprog', $data);
 	}
 
+
+	// tampilan pesanan yang sudah di selesai
 	public function done()
 	{
 		$data = array(
@@ -64,6 +70,7 @@ class Pesanan extends CI_Controller {
 		$this->load->view('vendor/pesanan/done', $data);
 	}
 
+	// cari pesanan yang masuk dari database
 	public function ajaxPesananMasuk()
 	{
 		$idUser = $this->session->userdata('idUser');
@@ -75,6 +82,7 @@ class Pesanan extends CI_Controller {
 		$this->load->view('vendor/pesanan/ajaxrpesananmasuk', $data);
 	}
 
+	// cari pesanan yang sudah di proses oleh vendor dari database
 	public function ajaxonprog()
 	{
 		$idUser = $this->session->userdata('idUser');
@@ -86,6 +94,7 @@ class Pesanan extends CI_Controller {
 		$this->load->view('vendor/pesanan/ajaxonprog', $data);
 	}
 
+	// cari pesanan yang sudah selesai
 	public function ajaxpesanandone()
 	{
 		$idUser = $this->session->userdata('idUser');
@@ -98,7 +107,7 @@ class Pesanan extends CI_Controller {
 	}
 
 
-
+	// proses transaksi penerimaan cetak dari kantor
 	public function prosestransaksi($idTransaksi)
 	{
 		$up = array(
@@ -132,6 +141,7 @@ class Pesanan extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	// set status selesai cetak, dan kirim notifikasi ke kantor via email
 	public function settunggupembayaran($idTransaksi)
 	{
 		$up = array(
@@ -166,6 +176,7 @@ class Pesanan extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	// selesaikan proses transaksi, setelah bukti pembayaran di kirim
 	public function selesaikan($idTransaksi)
 	{
 		$up = array(
@@ -199,7 +210,7 @@ class Pesanan extends CI_Controller {
 		echo json_encode($data);
 	}
 
-
+	// eksekusi email dari function2 diatas
  	public function kirimEmail($emailTujuan, $subject, $pesan)
  	{
  		// PHPMailer object

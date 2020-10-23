@@ -19,6 +19,7 @@ class Report extends CI_Controller {
 		redirect('admin','refresh');   
 	}
 
+	// tampilan report harian
 	public function harian()
 	{
 		$data = array(
@@ -30,6 +31,7 @@ class Report extends CI_Controller {
 		$this->load->view('admin/report/harian', $data);
 	}
 
+	// tampilan report bulan
 	public function bulanan()
 	{
 		$data = array(
@@ -41,6 +43,7 @@ class Report extends CI_Controller {
 		$this->load->view('admin/report/bulanan', $data);
 	}
 
+	// ambil data report harian dari database
 	public function ajaxReportHarian()
 	{
 		$data = array(
@@ -50,6 +53,7 @@ class Report extends CI_Controller {
 		$this->load->view('admin/report/ajaxreportharian', $data);
 	}
 
+	// ambil data report bulanan dari database
 	public function ajaxReportBulanan()
 	{
 		$data = array(
@@ -59,6 +63,7 @@ class Report extends CI_Controller {
 		$this->load->view('admin/report/ajaxreportbulanan', $data);
 	}
 
+	// ambil data transaksi berdasarkan tanggal
 	public function detailTransaksi($tgl)
 	{
 		$data = array(

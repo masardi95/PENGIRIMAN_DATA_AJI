@@ -10,6 +10,7 @@ class Auth extends CI_Controller
     $this->load->library('form_validation');
   }
 
+  // awalan tampilan login 
   public function index()
   {
     if(empty($this->session->userdata('authenticated'))){ 
@@ -30,6 +31,7 @@ class Auth extends CI_Controller
     }
   }
 
+  // cek login 
   public function cek_login()
   {
     $username = $this->input->post('username');
@@ -81,12 +83,14 @@ class Auth extends CI_Controller
     echo json_encode($data);
   }
 
+  // ambil logo page login
   public function ambilLogo()
   {
       $logo = $this->LoginModel->ambilLogo();
       echo json_encode($logo);
   }
 
+  // tombol logout
   public function logout(){
       $this->session->sess_destroy(); // Hapus semua session
       redirect('auth'); // Redirect ke halaman login

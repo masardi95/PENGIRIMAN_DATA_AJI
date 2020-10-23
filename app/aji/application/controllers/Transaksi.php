@@ -36,6 +36,7 @@ class Transaksi extends CI_Controller {
 	/********************************************** KIRIM ************************************************/
 	/*****************************************************************************************************/
 
+	// tampilan kirim file
 	public function kirim()
 	{
 		$data = array(
@@ -47,6 +48,7 @@ class Transaksi extends CI_Controller {
 		$this->load->view('admin/transaksi/kirim', $data);
 	}
 
+	// insert transaksi barang baru dari kantor ke vendor
 	public function doKirim()
 	{
 		$error = array();
@@ -110,7 +112,8 @@ class Transaksi extends CI_Controller {
 					'message' => 'Berhasil Insert Transaksi', 
 				);
 
-				// kirim ke email vendor 
+				// kirim ke email vendor  .......................
+				// kirim dengan file gambar
 				if (!empty($isi['nama_file'])) {
 					$this->kirimEmail(
 						$detailVendor->email_vendor,
@@ -123,6 +126,7 @@ class Transaksi extends CI_Controller {
 						'Order Baru'
 					);
 				}else{
+					// kirim dengan link external
 					$this->kirimEmail(
 						$detailVendor->email_vendor,
 						'Order "'.$isi['keterangan'].'" dengan nomor transaksi <b>'.$isi['no_transaksi'].'</b>, <br>'.
@@ -160,11 +164,13 @@ class Transaksi extends CI_Controller {
 		echo json_encode($isi);
 	}
 
+	// ambil transaksi berdasarkan id nya
 	public function getTransaksiById($id)
 	{
 		echo json_encode($this->TransaksiModel->getTransaksiById($id));
 	}
 
+	// tampilan design sedang dalam proses vendor
 	public function onprog()
 	{
 		$data = array(
@@ -176,6 +182,7 @@ class Transaksi extends CI_Controller {
 		$this->load->view('admin/transaksi/onprog', $data);
 	}
 
+	// tampilan transaksi sudah selesai
 	public function done()
 	{
 		$data = array(
@@ -187,7 +194,7 @@ class Transaksi extends CI_Controller {
 		$this->load->view('admin/transaksi/transaksidone', $data);
 	}
 
-
+	// ambil semua transaksi selesai dari database
 	public function fetchAllTransaksiSelesai()
 	{
 		$data = array('dataTransaksi' => $this->TransaksiModel->fetchAllTransaksiSelesai() );
@@ -196,6 +203,7 @@ class Transaksi extends CI_Controller {
 	}
 
 
+	// ambil semua transaksi belum selesai dari database
 	public function fetchAllTransaksiBelumSelesai()
 	{
 		$data = array('dataTransaksi' => $this->TransaksiModel->fetchAllTransaksiBelumProgres() );
@@ -203,6 +211,7 @@ class Transaksi extends CI_Controller {
 		$this->load->view('admin/transaksi/ajax_load_transaksi', $data);
 	}
 
+	// ambil semua transaksi yang sedang diproses vendor dari database
 	public function fetchAllProgTransaksi()
 	{
 		$data = array('dataTransaksi' => $this->TransaksiModel->fetchAllProgTransaksi() );
@@ -210,7 +219,7 @@ class Transaksi extends CI_Controller {
 		$this->load->view('admin/transaksi/ajax_load_transaksi_progres', $data);
 	}
 
-
+	// upload bukti pembayaran
 	public function upBukti()
 	{
 		$idTransaksi = $this->input->post('idTransaksi');
@@ -241,7 +250,7 @@ class Transaksi extends CI_Controller {
 				'message' => 'Berhasil Insert bukti', 
 			);
 			
-			// kirim ke email vendor 
+			// kirim ke notifikasi bukti pembayaran
 			$detailTransaksi 	= $this->TransaksiModel->getTransaksiById($idTransaksi);
 			$detailVendor	= $this->Mgtvendor_Model->getVendorById($detailTransaksi->id_vendor);
 			$this->kirimEmail(
@@ -263,6 +272,8 @@ class Transaksi extends CI_Controller {
 		echo json_encode($isi);
 	}
 
+
+	// proses kirim email ke vendor
  	public function kirimEmail($emailTujuan, $pesan, $subject)
  	{
  		// PHPMailer object

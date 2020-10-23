@@ -15,6 +15,7 @@ class Vendor extends CI_Controller {
 	    }
 	}
 
+	// dashbord vendor
 	public function index()
 	{
 
@@ -37,6 +38,7 @@ class Vendor extends CI_Controller {
 		$this->load->view('vendor/dashboard', $data);
 	}
 
+	// tampilan halaman profil vendor
 	public function kantor()
 	{
 		$idUser = $this->session->userdata('idUser');
@@ -50,7 +52,7 @@ class Vendor extends CI_Controller {
 		$this->load->view('vendor/kantor/kantor', $data);
 	}
 
-
+	// eksekusi edit detail data vendor
 	public function dovendor()
 	{
 		$idVendor = $this->input->post('idVendor');
@@ -76,6 +78,7 @@ class Vendor extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	// cari data vendor berdasarkan id vendor
 	public function getUserVendorById($idUser)
 	{
 		echo json_encode($this->Mgtvendor_Model->getUserVendorById($idUser));		

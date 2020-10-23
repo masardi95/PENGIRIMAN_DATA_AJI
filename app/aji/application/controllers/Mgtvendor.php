@@ -12,6 +12,8 @@ class Mgtvendor extends CI_Controller {
 	      redirect('auth/logout');
 	    }
 	}
+
+	// tampilan awal vendor
 	public function index()
 	{
 		$data = array(
@@ -19,10 +21,10 @@ class Mgtvendor extends CI_Controller {
 			'dataUser'				=> $this->session->userdata(),
 		);
 
-		// echo json_encode($data);
 		$this->load->view('admin/mgtvendor/mgtvendor', $data);
 	}
 
+	// tambah dan edit vendor
 	public function doData()
 	{
 		$idVendor	= $this->input->post('idVendor');
@@ -82,11 +84,13 @@ class Mgtvendor extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	// ambil vendor by id_vendor
 	public function getVendorById($idVendor)
 	{
 		echo json_encode($this->Mgtvendor_Model->getVendorById($idVendor));		
 	}
 
+	// soft hapus vendor by id_vendor
 	public function hapusVendorById($id)
 	{
 		if ($this->Mgtvendor_Model->hapusVendorById($id)) {
@@ -103,6 +107,7 @@ class Mgtvendor extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	// kembalikan vendor yg sudah di hapus
 	public function aktifkanvendorbyid($id)
 	{
 		if ($this->Mgtvendor_Model->aktifkanvendorbyid($id)) {
@@ -119,13 +124,15 @@ class Mgtvendor extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	// tampilkan data vendor dari database ke tampilan
 	public function ajaxFetchAllVendor()
 	{
 		$data = array('dataVendor' => $this->Mgtvendor_Model->ajaxFetchAllVendor());
 		// echo json_encode($data);
 		$this->load->view('admin/mgtvendor/ajax_vendor', $data);
 	}
-
+	
+	// cari vendor yg belum terhapus
 	public function fetchAllVendorAktive()
 	{
 		$data = array('dataVendor' => $this->Mgtvendor_Model->fetchAllVendorAktive());
@@ -140,6 +147,7 @@ class Mgtvendor extends CI_Controller {
 	/************************************************* USER VENDOR *****************************************************/
 	/*******************************************************************************************************************/
 
+	// tampilan awal user vendor
 	public function userVendor()
 	{
 		$data = array(
@@ -151,11 +159,13 @@ class Mgtvendor extends CI_Controller {
 		$this->load->view('admin/mgtvendor/mgtuservendor', $data);
 	}
 
+	// ambil user vendor berdasarkan id nya
 	public function getUserVendorById($idUser)
 	{
 		echo json_encode($this->Mgtvendor_Model->getUserVendorById($idUser));		
 	}
 
+	// ambil semua vendor
 	public function ajaxFetchAllUserVendor()
 	{
 		$data = array('dataUserVendor' => $this->Mgtvendor_Model->ajaxFetchAllUserVendor());
@@ -163,6 +173,7 @@ class Mgtvendor extends CI_Controller {
 		$this->load->view('admin/mgtvendor/ajax_user_vendor', $data);
 	}
 
+	// tambah dan edit data user vendor
 	public function doDataUser()
 	{
 		$idUserVendor	= $this->input->post('idUserVendor');
@@ -223,6 +234,7 @@ class Mgtvendor extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	// hapus soft user vendor
 	public function hapusUserVendorById($id)
 	{
 		if ($this->Mgtvendor_Model->hapusUserVendorById($id)) {
@@ -239,6 +251,8 @@ class Mgtvendor extends CI_Controller {
 		echo json_encode($data);
 	}
 
+
+	// hidupkan lagi user vendor yg telah 
 	public function aktifkanuservendorbyid($id)
 	{
 		if ($this->Mgtvendor_Model->aktifkanUserVendorById($id)) {
@@ -255,6 +269,7 @@ class Mgtvendor extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	// reset password user vendor ke default 123456
 	public function resetpwuservendor($id)
 	{
 		if ($this->Mgtvendor_Model->resetPwUserVendorById($id)) {

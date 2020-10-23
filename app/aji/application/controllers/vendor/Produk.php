@@ -15,6 +15,7 @@ class Produk extends CI_Controller {
 	    }
 	}
 
+	// tampilan produk vendor
 	public function index()
 	{
 		$data = array(
@@ -25,6 +26,7 @@ class Produk extends CI_Controller {
 		$this->load->view('vendor/produk/produk', $data);
 	}
 
+	// cari produk vendor tersebut
 	public function fetchProdukVendor()
 	{
 		$idUser = $this->session->userdata('idUser');
@@ -36,11 +38,13 @@ class Produk extends CI_Controller {
 		$this->load->view('vendor/produk/ajaxproduk', $data);
 	}
 
+	// ambil produk vendor tersebut berdasarkan id produk
 	public function getprodukbyid($idProduk)
 	{
 		echo json_encode($this->VendorProdukModel->getprodukbyid($idProduk));
 	}
 
+	// untuk menambah dan mengedit produk
 	public function doProduk()
 	{
 		$idUser = $this->session->userdata('idUser');
@@ -84,6 +88,7 @@ class Produk extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	// soft delete product
 	public function hapus($idProduk)
 	{
 		$isi = array('deleted' => 1);

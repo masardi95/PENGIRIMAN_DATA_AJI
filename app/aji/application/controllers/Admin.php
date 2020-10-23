@@ -13,6 +13,7 @@ class Admin extends CI_Controller {
 	    }
 	}
 
+	// tampilan dashboard admin
 	public function index()
 	{
 		$totTransaksi = $this->TransaksiModel->getCountAllTransaksi(0);
@@ -33,6 +34,7 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/dashboard', $data);
 	}
 
+	
 	function generateRandomToken() {
 	    $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	    $charactersLength = strlen($characters);
