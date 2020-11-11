@@ -2,11 +2,13 @@
     <thead>
     <tr>
         <th>No</th>
-        <th>Bulan Transaksi</th>
-        <th>Jumlah</th>
+        <th>Tgl Transaksi</th>
+        <th>Pending</th>
         <th>Diterima</th>
         <th>Selesai</th>
-        <th>Satuan</th>
+        <th>Total Anggaran</th>
+        <!-- <th>Satuan</th>
+        <th>Jumlah</th> -->
         <th>#</th>
     </tr>
     </thead>
@@ -18,10 +20,10 @@
                     <tr>
                         <td><?php echo $no; ?></td> 
                         <td><?php echo $dt->kirim; ?></td> 
-                        <td><?php echo $dt->jum_transaksi ?></td>                      
+                        <td><?php echo $dt->pending; ?></td> 
                         <td><?php echo $dt->diterima ?></td>                      
                         <td><?php echo $dt->selesai ?></td>                      
-                        <td><?php echo $dt->satuan ?></td>                       
+                        <td>Rp. <?php echo number_format($dt->tot_anggaran) ?></td>                   
                         <td>
                             <button class="btn btn-info" title="detail transaksi" onclick="lihatDetail('<?php echo $dt->bulan_kirim ?>')">
                                 <li class="fa fa-search"></li>

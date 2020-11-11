@@ -33,13 +33,14 @@
 						<td width="70%">
 							<div style="text-align-last: center">
 								<h3>
-									LAPORAN HARIAN
-									<br>
-									<?php echo $kantor->nama_kantor ?>
+									LAPORAN BULANAN ORDER CETAK "<?php echo $kantor->nama_kantor ?>"
 								</h3>
-								<?php echo $kantor->alamat_kantor ?>
 								<br>
-								Email: &nbsp;<?php echo $kantor->email_kantor ?>
+								<b><?php echo $vendor->nama_vendor ?></b>
+								<br>
+								<?php echo $vendor->alamat_vendor ?>
+								<br>
+								Email: &nbsp;<?php echo $vendor->email_vendor ?>
 							</div>
 						</td>
 						<td width="15%">&nbsp;</td>

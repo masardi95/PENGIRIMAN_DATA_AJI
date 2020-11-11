@@ -23,7 +23,9 @@
                     <tr>
                         <td><?php echo $dt->no_transaksi; ?></td>
                         <td>
-                          <img src="<?php echo site_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar; ?>" width="100px">
+                            <a title="Lihat Gambar File" href="<?php echo base_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar ?>" target="_blank">
+                                <img src="<?php echo site_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar; ?>" width="100px">
+                            </a>
                         </td>  
                         <td><?php echo $dt->nama_vendor; ?></td>                      
                         <td><?php echo empty($dt->nama_user_vendor) ? '-' : $dt->nama_user_vendor; ?></td>                      
@@ -45,9 +47,9 @@
                                  } else if (!empty($dt->bukti_pembayaran)) {
                                     ?>
                                         <img src="<?php echo site_url('assets/image/bukti/') ?><?php echo $dt->bukti_pembayaran; ?>" width="100px">
-                                        <button class="btn btn-info" title="upload bukti Pembayaran" onclick="upload(<?php echo $dt->id_transaksi ?>)">
+                                        <!-- <button class="btn btn-info" title="upload bukti Pembayaran" onclick="upload(<?php echo $dt->id_transaksi ?>)">
                                             <li class="fa fa-upload"></li>
-                                        </button>
+                                        </button> -->
                                     <?php
                                  }else{
                                     ?>

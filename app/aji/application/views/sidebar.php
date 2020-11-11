@@ -90,7 +90,19 @@
                                     <i class="fa fa-check-square-o"></i>Selesai</a>
                                 </li> 
                             </ul>
-                        </li>            
+                        </li>   
+
+                        <li class="">
+                            <a><i class="fa fa-line-chart"></i>Report<span class="fa fa-chevron-down"></span></a>
+                            <ul class="nav child_menu">
+                                <li class="<?php if($title=='Transaksi Harian') echo 'active';?>"><a href="<?php echo site_url('vendor/report/harian')?>">
+                                    <i class="fa fa-header"></i>Report Harian</a>
+                                </li>
+                                <li class="<?php if($title=='Transaksi Bulanan') echo 'active';?>"><a href="<?php echo site_url('vendor/report/bulanan')?>">
+                                    <i class="fa fa-book"></i>Report Bulanan </a>
+                                </li>   
+                            </ul>
+                        </li>         
                     <?php
                 }
             ?>

@@ -45,7 +45,7 @@
         console.log(tglKirim);
         loading(true);
         $.ajax({
-            url: url+'report/detailtransaksi/'+tglKirim,
+            url: url+'vendor/report/detailtransaksi/'+tglKirim,
             type: 'GET',
             dataType: 'HTML',
         })

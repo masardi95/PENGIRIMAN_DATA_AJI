@@ -20,7 +20,9 @@
                     <tr>
                         <td><?php echo $dt->no_transaksi; ?></td>
                         <td>
-                          <img src="<?php echo site_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar; ?>" width="100px">
+                            <a title="Lihat Gambar File" href="<?php echo base_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar ?>" target="_blank">
+                                <img src="<?php echo site_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar; ?>" width="100px">
+                            </a>
                         </td>  
                         <td><?php echo $dt->nama_vendor; ?></td>                      
                         <td><?php echo $dt->status; ?></td>                      

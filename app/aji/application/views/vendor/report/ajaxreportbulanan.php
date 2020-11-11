@@ -15,7 +15,7 @@
     <tbody>
         <?php
             $no=1;
-            foreach ($dataHarian as $dt) {
+            foreach ($dataBulanan as $dt) {
                 ?>
                     <tr>
                         <td><?php echo $no; ?></td> 
@@ -23,9 +23,9 @@
                         <td><?php echo $dt->pending; ?></td> 
                         <td><?php echo $dt->diterima ?></td>                      
                         <td><?php echo $dt->selesai ?></td>                      
-                        <td>Rp. <?php echo number_format($dt->tot_anggaran) ?></td>                      
+                        <td>Rp. <?php echo number_format($dt->tot_anggaran) ?></td>                   
                         <td>
-                            <button class="btn btn-info" title="detail transaksi" onclick="lihatDetail('<?php echo $dt->tgl_kirim ?>')">
+                            <button class="btn btn-info" title="detail transaksi" onclick="lihatDetail('<?php echo $dt->bulan_kirim ?>')">
                                 <li class="fa fa-search"></li>
                             </button>
                         </td>                       
@@ -45,7 +45,7 @@
         console.log(tglKirim);
         loading(true);
         $.ajax({
-            url: url+'report/detailtransaksi/'+tglKirim,
+            url: url+'vendor/report/detailtransaksi/'+tglKirim,
             type: 'GET',
             dataType: 'HTML',
         })

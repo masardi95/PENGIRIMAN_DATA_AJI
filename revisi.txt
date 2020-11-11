@@ -1,6 +1,32 @@
 1. hapus user dan vendor ben ra ketok... V
 2. tambah type super admin... V
-3. print harian dan bulanan
-
+3. print harian dan bulanan... V
 
 fatimahse12@gmail.com
+
+============================================================================ 9/11/2020
+Revisi sistem
+V1. Ada fitur convert kompres tumbnail agar lebih kecil atau Preview dihilangkan lagsung masuk ke table klik preview terus buka tab baru.
+
+X2. Ada status vendor di database untuk 0 aktif, 1 di nonaktifkan/hiden, untuk 2 hapus dari database,
+
+V3. Button download master file dan file mentah ditambahkan di bagian On Progres antisipasi vendor lupa proses tanpa unduh file .
+
+V4. Dialog form menyelesaikan transaksi oleh vendor, untuk konfirmasi ulang bahwa memang sudah benar2 di selesaikan percetakanya.
+
+V5. Susunan report harian bulanan	| Pending | diterima | Selesai | Total Anggaran.
+
+V6. Ditambahkan logo di form report.
+
+7. Primerikey database pada "id" tiap item.
+
+
+----------------------------------------------------------------------------
+
+1. nang vendor kan ana menu lihat master file, naah anggo button kui wae mas, antisipasi file gagal upload anane logo jpg blank kae mas
+
+2. coba tak takonke maning sing iki, ujarku juga wis sesuai sih.
+
+5. iya mas, rekape susunane kaya iki, 
+
+7. Owh iki nang laporan udu nang sistem mas

@@ -272,6 +272,17 @@ class Transaksi extends CI_Controller {
 		echo json_encode($isi);
 	}
 
+	public function cekEmail()
+	{
+		$this->kirimEmail(
+			'gpoex.mas@gmail.com',
+			'Nomor Transaksi '.
+			'Terimakasih <br>'.
+			''.$this->session->userdata('namaUser'),
+			'Pembayaran Order'
+		);
+	}
+
 
 	// proses kirim email ke vendor
  	public function kirimEmail($emailTujuan, $pesan, $subject)
@@ -307,10 +318,10 @@ class Transaksi extends CI_Controller {
 
 	      // Send email
 	      if(!$mail->send()){
-	          // echo 'Message could not be sent.';
-	          // echo 'Mailer Error: ' . $mail->ErrorInfo;
+	          echo 'Message could not be sent.';
+	          echo 'Mailer Error: ' . $mail->ErrorInfo;
 	      }else{
-	          // echo 'Message has been sent';
+	          echo 'Message has been sent';
 	      }
  	}
 

@@ -21,16 +21,30 @@
 	<div class="page">
 		<div class="row">
 			<div class="col-md-12">
-				<div style="text-align-last: center">
-					<h3>
-						LAPORAN HARIAN
-						<br>
-						<?php echo $kantor->nama_kantor ?>
-					</h3>
-					<?php echo $kantor->alamat_kantor ?>
-					<br>
-					Email: &nbsp;<?php echo $kantor->email_kantor ?>
-				</div>
+				<table width="100%">
+					<tr>
+						<td width="15%">
+							<?php if ($kantor->logo == ''): ?>
+								<img src="<?php echo base_url() ?>assets/image/loading.gif" alt="IMG" width="100%">
+							<?php else: ?>
+								<img src="<?php echo base_url() ?>assets/image/logo/<?php echo $kantor->logo ?>" alt="IMG" width="100%">
+							<?php endif ?>
+						</td>
+						<td width="70%">
+							<div style="text-align-last: center">
+								<h3>
+									LAPORAN HARIAN
+									<br>
+									<?php echo $kantor->nama_kantor ?>
+								</h3>
+								<?php echo $kantor->alamat_kantor ?>
+								<br>
+								Email: &nbsp;<?php echo $kantor->email_kantor ?>
+							</div>
+						</td>
+						<td width="15%">&nbsp;</td>
+					</tr>					
+				</table>			
 				<hr>
 				<hr>
 			</div>

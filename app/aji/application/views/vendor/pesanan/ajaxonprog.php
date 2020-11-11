@@ -21,7 +21,9 @@
                 ?>
                     <tr>
                         <td>
-                          <img src="<?php echo site_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar; ?>" width="100px">
+                            <a title="Lihat Gambar File" href="<?php echo base_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar ?>" target="_blank">
+                                <img src="<?php echo site_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar; ?>" width="100px">
+                            </a>
                         </td>  
                         <td><?php echo $dt->no_transaksi; ?></td> 
                         <td><?php echo $dt->bahan; ?></td>                      
@@ -57,6 +59,19 @@
                                      <?php
                                  }
                             ?>
+
+                            <a class="btn btn-info" title="Lihat Gambar File" href="<?php echo base_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar ?>" target="_blank">
+                                <li class="fa fa-eye"></li>
+                            </a>
+                            <?php if (!empty($dt->nama_file)): ?>
+                                <a class="btn btn-primary" title="Download Master File" href="<?php echo base_url('assets/image/filekirim/') ?><?php echo $dt->nama_file ?>">
+                                    <li class="fa fa-download"></li>
+                                </a>
+                            <?php else: ?>
+                                <a class="btn btn-primary" title="Download Master File" href="<?php echo $dt->link_external ?>" target="_blank">
+                                    <li class="fa fa-download"></li>
+                                </a>
+                            <?php endif ?>
                         </td>                                       
                     </tr>
                 <?php
@@ -71,22 +86,25 @@
     });
 
     function proses(idTransaksi) {
-        loading(true);
-        $.ajax({
-            url: url+'vendor/pesanan/settunggupembayaran/'+idTransaksi,
-            type: 'GET',
-            dataType: 'JSON',
-        })
-        .done(function(e) {
-            console.log(e);
-        })
-        .fail(function() {
-            console.log("error");
-        })
-        .always(function() {
-            loadPesananOnprog();
-            console.log("complete");
-        });        
+        var ya = confirm("Yakin Selesaikan proses pengerjaan cetak ???");
+        if (ya) {
+            loading(true);
+            $.ajax({
+                url: url+'vendor/pesanan/settunggupembayaran/'+idTransaksi,
+                type: 'GET',
+                dataType: 'JSON',
+            })
+            .done(function(e) {
+                console.log(e);
+            })
+            .fail(function() {
+                console.log("error");
+            })
+            .always(function() {
+                loadPesananOnprog();
+                console.log("complete");
+            });        
+        }
     }
 
     function lihatBukti(buktiPembayaran) {

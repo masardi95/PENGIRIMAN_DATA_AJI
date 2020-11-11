@@ -34,6 +34,11 @@
       .right_col{
           background: #ffffff !important;
       }
+
+      .modal{
+      	overflow-y: auto !important;
+      }
+      
   </style>
 
 <?php $this->load->view('modalMaster'); ?>
