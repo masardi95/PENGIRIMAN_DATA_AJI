@@ -7,8 +7,6 @@
         <th>Diterima</th>
         <th>Selesai</th>
         <th>Total Anggaran</th>
-        <!-- <th>Satuan</th>
-        <th>Jumlah</th> -->
         <th>#</th>
     </tr>
     </thead>
@@ -41,13 +39,23 @@
         $('#datatable-buttons').DataTable();
     });
 
-    function lihatDetail(tglKirim) {
-        console.log(tglKirim);
+    function lihatDetail(bulanKirim) {
+        var filterPending = $('#input_pending').val();
+        var filterProg = $('#input_onprogress').val();
+        var filterDone = $('#input_done').val();
         loading(true);
+
         $.ajax({
-            url: url+'report/detailtransaksi/'+tglKirim,
-            type: 'GET',
+            // url: url+'report/detailtransaksi/'+tglKirim,
+            url: url+'report/detailTransaksiBulanan',
+            type: 'POST',
             dataType: 'HTML',
+            data : {
+                'bulanKirim' : bulanKirim,
+                'filterPending'   : filterPending,
+                'filterProg'   : filterProg,
+                'filterDone'   : filterDone
+            }
         })
         .done(function(e) {
             $('#dataDetail').html('');

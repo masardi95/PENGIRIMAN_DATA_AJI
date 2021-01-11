@@ -4,16 +4,21 @@
 	<title>Report Harian</title>
 	<style>
 		@media print {
-	    html, body {
-	        font-family: 'Roboto', sans-serif;
-	        margin: 0;
-	        background: unset !important;
-	        border: unset !important;
-	        min-height: auto !important;
-	        -webkit-print-color-adjust: exact;
-	    }
-	    td{
-	    	font-size: 12px;
+		    html, body {
+		        font-family: 'Roboto', sans-serif;
+		        margin: 0;
+		        background: unset !important;
+		        border: unset !important;
+		        min-height: auto !important;
+		        -webkit-print-color-adjust: exact;
+		    }
+		    td{
+		    	font-size: 12px;
+		    }
+		}
+
+	    .ttd{
+	    	text-align-last: center  !important;
 	    }
 	</style>
 </head>
@@ -24,19 +29,18 @@
 				<table width="100%">
 					<tr>
 						<td width="15%">
-							<?php if ($kantor->logo == ''): ?>
-								<img src="<?php echo base_url() ?>assets/image/loading.gif" alt="IMG" width="100%">
-							<?php else: ?>
-								<img src="<?php echo base_url() ?>assets/image/logo/<?php echo $kantor->logo ?>" alt="IMG" width="100%">
-							<?php endif ?>
+           					<img src="<?php echo base_url() ?>assets/image/logo/logo_lantas.png" alt="IMG" width="100%">
 						</td>
 						<td width="70%">
 							<div style="text-align-last: center">
-								<h3>
-									LAPORAN BULANAN ORDER CETAK "<?php echo $kantor->nama_kantor ?>"
-								</h3>
+								<h2>
+									LAPORAN BULANAN ORDER CETAK
+								</h2>
+								<h2 style="margin-top: -20px; margin-bottom: 0px">
+									<?php echo $kantor->nama_kantor ?>
+								</h2>
 								<br>
-								<b><?php echo $vendor->nama_vendor ?></b>
+								<b> Admin : <?php echo $vendor->nama_vendor ?></b>
 								<br>
 								<?php echo $vendor->alamat_vendor ?>
 								<br>
@@ -77,6 +81,7 @@
 												<td>Tgl Kirim</td>
 												<td>Tgl Selesai</td>
 												<td>Tgl Pelunasan</td>
+												<td>Ukuran ( Pxl )</td>
 												<td>Jumlah</td>
 												<td>Keterangan</td>
 												<td>Total</td>
@@ -90,6 +95,7 @@
 															<td><?php echo $det['tglKirim'] ?></td>
 															<td><?php echo $det['tglSelesai'] ?></td>
 															<td><?php echo $det['tgl_pelunasan'] ?></td>
+															<td><?php echo $det['ukuran'] ?></td>
 															<td><?php echo $det['jumlah'] ?></td>
 															<td><?php echo $det['keterangan'] ?></td>
 															<td><?php echo $det['totalBayar'] ?></td>
@@ -113,6 +119,41 @@
 						<?php endforeach ?>
 					</table>
 			</div>
+		</div>
+		<div class="row" style="border: dotted; margin-left: 110px; margin-right: 110px; margin-top: 30px" >
+			<br>
+			<br>
+			<table width="100%">
+				<tr>
+					<td width="40%" class="ttd">Staf Admin</td>
+					<td width="20%" class="ttd">&nbsp;</td>
+					<td width="40%" class="ttd">Kaur Mintu</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td class="ttd">Satlantas Polres Kebumen</td>
+				</tr>
+				<?php 
+					for ($i=0; $i <3 ; $i++) { 
+						?>
+							<tr>
+								<td colspan="3">&nbsp;</td>
+							</tr>
+						<?php
+					}
+				?>
+				<tr>
+					<td class="ttd">( <?php echo $this->session->userdata('namaUser'); ?> )</td>
+					<td class="ttd">&nbsp;</td>
+					<td class="ttd">( Aiptu Agus Wijayanto, S.H. )</td>
+				</tr>
+				
+
+			</table>
+			
+			<br>
+			<br>
 		</div>
 	</div>
 </body>

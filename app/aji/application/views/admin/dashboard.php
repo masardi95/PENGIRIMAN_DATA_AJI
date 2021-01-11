@@ -35,7 +35,7 @@
                             <div class="tile-stats">
                                 <div class="icon"><i class="fa fa-spinner"></i></div>
                                 <div class="count"><?php echo $totPending; ?></div>
-                                <h3>Pending</h3>
+                                <h3>Antrian Cetak</h3>
                             </div>
                         </div>
                         <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -49,7 +49,7 @@
                             <div class="tile-stats">
                                 <div class="icon"><i class="fa fa-check"></i></div>
                                 <div class="count"><?php echo $totSelesai; ?></div>
-                                <h3>Done</h3>
+                                <h3>Selesai</h3>
                             </div>
                         </div>
                     </div>

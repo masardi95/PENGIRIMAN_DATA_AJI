@@ -18,13 +18,13 @@
                 ?>
                     <tr>
                         <td><?php echo $no; ?></td> 
-                        <td><?php echo $dt->no_transaksi; ?></td> 
-                        <td><?php echo $dt->nama_vendor ?></td>
-                        <td><?php echo $dt->panjang." x ".$dt->lebar ?></td>  
-                        <td><?php echo $dt->tgl_kirim ?></td>                      
-                        <td><?php echo $dt->status ?></td>                      
-                        <td><?php echo $dt->jumlah ?></td>                       
-                        <td>Rp. <?php echo number_format(($dt->harga*$dt->jumlah*$dt->panjang*$dt->lebar),2) ?></td>                          
+                        <td><?php echo $dt['no_transaksi']; ?></td> 
+                        <td><?php echo $dt['nama_vendor'] ?></td>
+                        <td><?php echo $dt['panjang']." x ".$dt['lebar'] ?></td>  
+                        <td><?php echo $dt['tgl_kirim'] ?></td>                      
+                        <td><?php echo $dt['status'] ?></td>                      
+                        <td><?php echo $dt['jumlah'] ?></td>                       
+                        <td>Rp. <?php echo number_format(($dt['harga']*$dt['jumlah']*$dt['panjang']*$dt['lebar']),2) ?></td>                          
                     </tr>
                 <?php
             $no++;

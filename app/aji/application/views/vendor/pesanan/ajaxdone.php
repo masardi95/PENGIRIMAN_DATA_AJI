@@ -9,7 +9,9 @@
         <th>Tgl Proses</th>
         <th>Tgl Pelunasan</th>
         <th>Tgl Acc Pembayaran</th>
+        <th>Ukuran (P x l)</th>
         <th>Jumlah</th>
+        <th>Total Bayar</th>
         <th>Dari</th>
         <th>Keterangan</th>
     </tr>
@@ -21,9 +23,7 @@
                 ?>
                     <tr>
                         <td>
-                            <a title="Lihat Gambar File" href="<?php echo base_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar ?>" target="_blank">
-                                <img src="<?php echo site_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar; ?>" width="100px">
-                            </a>
+                          <img src="<?php echo site_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar; ?>" width="100px">
                         </td>  
                         <td><?php echo $dt->no_transaksi; ?></td> 
                         <td><?php echo $dt->bahan; ?></td>                      
@@ -32,7 +32,9 @@
                         <td><?php echo $dt->tgl_proses ?></td>                      
                         <td><?php echo $dt->tgl_pelunasan ?></td>                      
                         <td><?php echo $dt->tgl_acc ?></td>                      
-                        <td><?php echo $dt->jumlah ?></td>                      
+                        <td><?php echo $dt->panjang ." x ".$dt->lebar ?></td>  
+                        <td><?php echo $dt->jumlah ?></td>  
+                        <td><?php echo "Rp. ".number_format($dt->panjang * $dt->lebar * $dt->harga * $dt->jumlah)?></td>                 
                         <td><?php echo $dt->nama_user_kantor ?> (<?php echo $dt->nama_kantor ?>)</td>                      
                         <td><?php echo $dt->keterangan ?></td>                                                            
                     </tr>

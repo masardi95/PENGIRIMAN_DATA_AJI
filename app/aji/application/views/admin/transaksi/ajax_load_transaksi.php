@@ -5,8 +5,10 @@
         <th>Gambar</th>
         <th>Tujuan</th>
         <th>Status</th>
-        <th>Keterangan</th>
+        <th>Keterangan</th> 
+        <th>Ukuran (P x l)</th>
         <th>Jumlah</th>
+        <th>Total Bayar</th> 
         <th>Bahan</th>
         <th>Tgl Kirim</th>
         <th>#</th>
@@ -20,14 +22,14 @@
                     <tr>
                         <td><?php echo $dt->no_transaksi; ?></td>
                         <td>
-                            <a title="Lihat Gambar File" href="<?php echo base_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar ?>" target="_blank">
-                                <img src="<?php echo site_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar; ?>" width="100px">
-                            </a>
+                          <img src="<?php echo site_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar; ?>" width="100px">
                         </td>  
                         <td><?php echo $dt->nama_vendor; ?></td>                      
                         <td><?php echo $dt->status; ?></td>                      
                         <td><?php echo $dt->keterangan ?></td>                      
-                        <td><?php echo $dt->jumlah ?></td>                      
+                        <td><?php echo $dt->panjang." x ".$dt->lebar ?></td>                      
+                        <td><?php echo $dt->jumlah ?></td>  
+                        <td><?php echo "Rp. ".number_format($dt->panjang * $dt->lebar * $dt->harga * $dt->jumlah)?></td>                         
                         <td><?php echo $dt->nama_product ?></td>                      
                         <td><?php echo $dt->tgl_kirim ?></td>                      
                         <td>

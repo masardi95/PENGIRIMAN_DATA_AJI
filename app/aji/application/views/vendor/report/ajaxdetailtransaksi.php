@@ -4,6 +4,7 @@
         <th>No</th>
         <th>Kode Trans</th>
         <th>Nama Pengirim</th>
+        <th>Ukuran ( PxL )</th>
         <th>Kirim</th>
         <th>Status</th>
         <th>Jumlah</th>
@@ -18,11 +19,12 @@
                     <tr>
                         <td><?php echo $no; ?></td> 
                         <td><?php echo $dt->no_transaksi; ?></td> 
-                        <td><?php echo $dt->nama_user_kantor ?></td>                      
+                        <td><?php echo $dt->nama_user_kantor ?></td>
+                        <td><?php echo $dt->panjang." x ".$dt->lebar ?></td>                       
                         <td><?php echo $dt->tgl_kirim ?></td>                      
                         <td><?php echo $dt->status ?></td>                      
                         <td><?php echo $dt->jumlah ?></td>                       
-                        <td>Rp. <?php echo number_format(($dt->harga*$dt->jumlah),2) ?></td>                          
+                        <td>Rp. <?php echo number_format(($dt->harga*$dt->jumlah*$dt->panjang*$dt->lebar),2) ?></td>                          
                     </tr>
                 <?php
             $no++;

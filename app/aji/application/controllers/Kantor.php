@@ -14,7 +14,6 @@ class Kantor extends CI_Controller {
 	    }
 	}
 
-	// tampilan awal page kantor
 	public function index()
 	{
 		$kantor = $this->Kantor_Model->getKantorDetail();
@@ -28,7 +27,6 @@ class Kantor extends CI_Controller {
 		$this->load->view('admin/kantor/kantor', $data);
 	}
 
-	// eksekusi add dan update user kantor
 	public function dokantor()
 	{
 		$config['upload_path'] 		= './assets/image/logo/';
@@ -74,7 +72,6 @@ class Kantor extends CI_Controller {
 
 
 	/******************************************** MGT USER *****************************************/
-	// page awal user kantor
 	public function user()
 	{
 		$data = array(
@@ -86,7 +83,6 @@ class Kantor extends CI_Controller {
 		$this->load->view('admin/kantor/user', $data);
 	}
 
-	// cari user kantor yg aktif
 	public function fetchUserAktif()
 	{
 		$data = array(
@@ -96,13 +92,11 @@ class Kantor extends CI_Controller {
 		$this->load->view('admin/kantor/ajax_user_kantor', $data);
 	}
 
-	// cari user kantor berdasarkan ID user
 	public function fetchUserKantorById($id)
 	{
 		echo json_encode($this->Kantor_Model->getUserKantorById($id));
 	}
 
-	// soft hapus user kantor
 	public function onOffUserKantor($status, $idUser)
 	{
 		$isi = array(
@@ -123,7 +117,6 @@ class Kantor extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	// tambah dan edit user kantor
 	public function doUserKantor()
 	{
 		$idUser = $this->input->post('idUser');

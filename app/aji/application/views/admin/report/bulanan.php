@@ -26,11 +26,51 @@
               <div class="row">
                 <div class="col-md-12">
                   <strong><h3><?php echo $title; ?></h3></strong>
-                  <a href="<?php echo base_url('report/cetakbulanan') ?>" target="_BLANK" class="pull-right"> 
+                  <!-- <a href="<?php echo base_url('report/cetakbulanan') ?>" target="_BLANK" class="pull-right"> 
                     <button class="btn btn-primary pull-right">
                       <li class="fa fa-print">&nbsp;Cetak Laporan</li>
                     </button>
-                  </a>
+                  </a> -->
+                </div>
+                <div class="col-md-12">
+                  <form id="formFilter">
+                    <input type="hidden" id="input_pending" value="">
+                    <input type="hidden" id="input_onprogress" value="">
+                    <input type="hidden" id="input_done" value="">
+                    <div class='col-sm-4'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker6'>
+                                <input type='text' class="form-control" id="date_awal" name="date_awal" placeholder="tanggal awal" required />
+                                <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-sm-4'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker7'>
+                                <input type='text' class="form-control" id="date_akhir" name="date_akhir" placeholder="tanggal akhir" required />
+                                <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                      <div class="form-group">
+                        <div class="checkbox">
+                          <label><input id="pending" name="pending" type="checkbox" value="1">Pending</label>&nbsp;&nbsp;&nbsp;
+                          <label><input id="onprogress" name="onprogress" type="checkbox" value="1">On Progress</label>&nbsp;&nbsp;&nbsp;
+                          <label><input id="done" name="done" type="checkbox" value="1">Selesai</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <button type="submit" class="btn btn-info"><li class="fa fa-search">Search</li></button>
+                      <a class="btn btn-primary" id="btnCetakAll"><li class="fa fa-print">Cetak</li></a>
+                    </div>
+                  </form>
                 </div>
               </div>
               <div class="x_content">                
@@ -66,7 +106,7 @@
 </html>
 <script>
     $(document).ready(function() {
-      loadData();
+      // loadData();
     });
 
     function loadData() {
@@ -88,4 +128,81 @@
       });
       
     }
+</script>
+
+<script>
+  $('input:checkbox').click(function(e) {
+    var $this = $(this);
+    var id = $this.attr('id');
+    if($this.is(":checked")){
+      $('#input_'+id).val('1');
+    }else{
+      $('#input_'+id).val('');
+    }
+  });
+</script>
+
+<script>
+  $('#formFilter').submit(function(e) {
+    /* Act on the event */
+    e.preventDefault();
+    loading(true)
+
+    $.ajax({
+      url: url+'report/ajaxreportbulanan',
+      type: 'post',
+      dataType: 'html',
+      data:  $(this).serialize(),
+    })
+    .done(function() {
+        loading(false);
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function(e) {
+      console.log("error");
+      $('#dataReportHarian').html(e);
+    });
+    
+  });
+</script>
+
+
+<script>
+    $('#datetimepicker6').datetimepicker();    
+    $('#datetimepicker7').datetimepicker({
+        useCurrent: false
+    });
+    
+    $("#datetimepicker6").on("dp.change", function(e) {
+        $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+    });
+    
+    $("#datetimepicker7").on("dp.change", function(e) {
+        $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+    });
+</script>
+
+<script>
+  $('#btnCetakAll').click(function(event) {
+    $.ajax({
+      url: url+'report/cetakbulanan',
+      type: 'post',
+      dataType: 'json',
+      data:  $('#formFilter').serialize(),
+    })
+    .done(function() {
+        loading(false);
+    })
+    .fail(function(e) {
+    })
+    .always(function(e) {
+      console.log(e);
+      var w = window.open('about:blank');
+      w.document.open();
+      w.document.write(e.responseText);
+      w.document.close();
+    });
+  });
 </script>

@@ -55,11 +55,11 @@
                   <div class="modal-body">    
                     <input type="hidden" name="idTransaksi" id="idTransaksi">
                     <div class="row">
-                      <div class="col-md-12">
-                        <div class="col-md-4">
+                      <div class="pull-left col-md-4">
                           <img src="<?php echo site_url('assets/image/75.png') ?>" id="gambarFilePrev" style="width: 100%">
-                        </div>
-                        <div class="col-md-4">
+                      </div>
+                      <div class="col-md-8 pull-right">
+                        <div class="col-md-6 col-xs-12">
                           <div class="form-group">
                             <label>Kirim ke vendor</label>
                             <select class="form-control chosen-select" name="emailVendor" id="emailVendor" required>
@@ -67,7 +67,7 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6 col-xs-12">
                           <div class="form-group">
                             <label>Produk vendor</label>
                             <select class="form-control chosen-select" name="prodVendor" id="prodVendor" required>
@@ -75,29 +75,46 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-md-8">
+
+                        <div class="col-md-6 col-xs-12">
+                          <div class="form-group">
+                            <label>Panjang</label>
+                            <input type="number" name="panjang" id="panjang" step="any" class="form-control">
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-xs-12">
+                          <div class="form-group">
+                            <label>Lebar</label>
+                            <input type="number" name="lebar" id="lebar" step="any" class="form-control">
+                          </div>
+                        </div>
+
+                        <div class="col-md-12 col-xs-12">
                           <div class="form-group">
                             <label>Jumlah Cetak</label>
                             <input type="number" class="form-control" name="jumCetak" id="jumCetak" min="1" max="100" value="1" required>
                           </div>
+                        </div>
+                        <div class="col-md-12 col-xs-12">
                           <div class="form-group">
                             <label>Keterangan Cetak</label>
                             <input type="text" class="form-control" name="ket" id="ket" required>
                           </div>  
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6 col-xs-12">
                           <div class="form-group">
                             <label>Gambar Cetak</label>
-                            <input type="file" name="gambarFile" id="gambarFile"  accept="image/*">
+                            <input type="file" name="gambarFile" id="gambarFile" class="form-control" accept="image/*">
                           </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6 col-xs-12">
+
                           <div class="form-group">
                             <input type="radio" class="pilihan" name="pilihan" value="file" checked> File
                             <input type="radio" class="pilihan" name="pilihan" value="link"> Link
                             <br>
                             <input type="text" class="form-control" name="linkExternal" id="linkExternal" style="display: none;">
-                            <input type="file" name="fileMentah" id="fileMentah"  accept=".cdr, .psd, .ai">
+                            <input type="file" name="fileMentah" id="fileMentah" class="form-control" accept=".cdr, .psd, .ai, .pdf, .jpg">
                         
                             
                             
@@ -112,7 +129,7 @@
                     </div>           
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary" id="btnKirim">Simpan</button>
                   </div>
                 <?php echo form_close(); ?>
@@ -208,4 +225,22 @@
         $('#fileMentah').show();
       }
     });
+
+    // function calculateLuas(panjang, lebar) {
+    //   $('#luas').val(parseInt(panjang) * parseInt(lebar))
+    // }
+
+    // $('#panjang').change(function(){
+    //   const panjang = $(this).val()
+    //   const lebar = $('#lebar').val()
+
+    //   calculateLuas(panjang, lebar)
+    // })
+
+    // $('#lebar').change(function(){
+    //   const lebar = $(this).val()
+    //   const panjang = $('#panjang').val()
+
+    //   calculateLuas(panjang, lebar)
+    // })
 </script>

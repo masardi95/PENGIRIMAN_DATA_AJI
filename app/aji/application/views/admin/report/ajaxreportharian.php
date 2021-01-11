@@ -3,12 +3,10 @@
     <tr>
         <th>No</th>
         <th>Tgl Transaksi</th>
-        <th>Pending</th>
-        <th>Diterima</th>
+        <th>Antrian Cetak</th>
+        <th>Proses</th>
         <th>Selesai</th>
         <th>Total Anggaran</th>
-        <!-- <th>Satuan</th>
-        <th>Jumlah</th> -->
         <th>#</th>
     </tr>
     </thead>
@@ -23,12 +21,12 @@
                         <td><?php echo $dt->pending; ?></td> 
                         <td><?php echo $dt->diterima ?></td>                      
                         <td><?php echo $dt->selesai ?></td>                      
-                        <td>Rp. <?php echo number_format($dt->tot_anggaran) ?></td>                      
+                        <td>Rp. <?php echo number_format($dt->tot_anggaran) ?></td>                   
                         <td>
                             <button class="btn btn-info" title="detail transaksi" onclick="lihatDetail('<?php echo $dt->tgl_kirim ?>')">
                                 <li class="fa fa-search"></li>
                             </button>
-                        </td>                       
+                        </td>                        
                     </tr>
                 <?php
             $no++;
@@ -42,12 +40,21 @@
     });
 
     function lihatDetail(tglKirim) {
-        console.log(tglKirim);
+       var filterPending = $('#input_pending').val();
+       var filterProg = $('#input_onprogress').val();
+       var filterDone = $('#input_done').val();
         loading(true);
         $.ajax({
-            url: url+'report/detailtransaksi/'+tglKirim,
-            type: 'GET',
+            // url: url+'report/detailtransaksi/'+tglKirim,
+            url: url+'report/detailtransaksi/',
+            type: 'POST',
             dataType: 'HTML',
+            data :{
+                'tglKirim' : tglKirim,
+                'filterPending'   : filterPending,
+                'filterProg'   : filterProg,
+                'filterDone'   : filterDone
+            }
         })
         .done(function(e) {
             $('#dataDetail').html('');
@@ -59,7 +66,6 @@
         .always(function() {
             loading(false);
             $('#modalDetailTransaksi').modal('show');    
-            console.log("complete");
         });        
     }
 </script>

@@ -12,6 +12,7 @@ class VendorPesananModel extends CI_Model {
 		$this->db->join('product p', 'p.id_product = t.id_product ');
 		$this->db->where('tgl_proses is NULL', NULL, FALSE);
 		$this->db->where('t.id_vendor', $idVendor);
+		$this->db->where('t.status !=', 'Ditolak Vendor');
 		$this->db->order_by('t.id_transaksi', 'desc');
 		return $this->db->get()->result();
 	}

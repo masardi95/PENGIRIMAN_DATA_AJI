@@ -23,6 +23,7 @@
                             <a href="<?php echo site_url('kantor/user')?>"><i class="fa fa-user"></i>Mgt User Kantor</a>
                         </li>
 
+
                         <li class="">
                             <a><i class="fa fa-gear"></i>Mgt Vendor <span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
@@ -39,10 +40,10 @@
                             <a><i class="fa fa-money"></i>Transaksi<span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li class="<?php if($title=='Kirim Data') echo 'active';?>"><a href="<?php echo site_url('transaksi/kirim')?>">
-                                    <i class="fa fa-upload"></i>Kirim</a>
-                                </li>
+                                    <i class="fa fa-upload"></i>Antrian Cetak</a>
+                                </li>                                
                                 <li class="<?php if($title=='Transaksi Progres') echo 'active';?>"><a href="<?php echo site_url('transaksi/onprog')?>">
-                                    <i class="fa fa-spinner"></i>On Prog</a>
+                                    <i class="fa fa-spinner"></i>Proses</a>
                                 </li> 
                                 <li class="<?php if($title=='Transaksi Selesai') echo 'active';?>"><a href="<?php echo site_url('transaksi/done')?>">
                                     <i class="fa fa-check-square-o"></i>Selesai</a>
@@ -62,6 +63,9 @@
                             </ul>
                         </li>
             
+                        <li class="<?php if($title=='Panduan') echo 'active';?>">
+                            <a href="<?php echo site_url('panduan/')?>"><i class="fa fa-book"></i>Informasi</a>
+                        </li>
                     <?php
                 }else{
                     ?>
@@ -78,21 +82,20 @@
                         </li>
 
                         <li class="">
-                            <a><i class="fa fa-space-shuttle"></i>Pesanan<span class="fa fa-chevron-down"></span></a>
+                            <a><i class="fa fa-sign-in"></i>Pesanan<span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li class="<?php if($title=='Pesanan Masuk') echo 'active';?>"><a href="<?php echo site_url('vendor/pesanan/in')?>">
-                                    <i class="fa fa-download"></i>Masuk</a>
+                                    <i class="fa fa-download"></i>Antrian Cetak</a>
                                 </li>  
                                 <li class="<?php if($title=='Sedang Proses') echo 'active';?>"><a href="<?php echo site_url('vendor/pesanan/onprog')?>">
-                                    <i class="fa fa-wrench"></i>on Progres</a>
+                                    <i class="fa fa-wrench"></i>Proses</a>
                                 </li>
                                 <li class="<?php if($title=='Transaksi Selesai') echo 'active';?>"><a href="<?php echo site_url('vendor/pesanan/done')?>">
                                     <i class="fa fa-check-square-o"></i>Selesai</a>
                                 </li> 
                             </ul>
-                        </li>   
-
-                        <li class="">
+                        </li>
+                            <li class="">
                             <a><i class="fa fa-line-chart"></i>Report<span class="fa fa-chevron-down"></span></a>
                             <ul class="nav child_menu">
                                 <li class="<?php if($title=='Transaksi Harian') echo 'active';?>"><a href="<?php echo site_url('vendor/report/harian')?>">
@@ -102,6 +105,10 @@
                                     <i class="fa fa-book"></i>Report Bulanan </a>
                                 </li>   
                             </ul>
+                        </li>   
+
+                        <li class="<?php if($title=='Panduan') echo 'active';?>">
+                            <a href="<?php echo site_url('panduan/')?>"><i class="fa fa-book"></i>Informasi</a>
                         </li>         
                     <?php
                 }

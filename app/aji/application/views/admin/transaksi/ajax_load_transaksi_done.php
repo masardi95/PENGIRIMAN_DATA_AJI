@@ -30,7 +30,7 @@
                         <td><?php echo empty($dt->tgl_proses) ?'-':$dt->tgl_proses ?></td>                      
                         <td><?php echo empty($dt->tgl_pelunasan) ?'-':$dt->tgl_pelunasan ?></td>  
                         <td><?php echo empty($dt->tgl_acc) ?'-':$dt->tgl_acc ?></td>  
-                        <td>Rp. <?php echo number_format(($dt->jumlah*$dt->harga),2) ?></td>                    
+                        <td>Rp. <?php echo number_format(($dt->jumlah*$dt->harga*$dt->panjang*$dt->lebar),2) ?></td>                    
                     </tr>
                 <?php
             $no++;

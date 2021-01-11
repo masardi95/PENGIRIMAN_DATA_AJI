@@ -6,7 +6,9 @@
         <th>Bahan</th>
         <th>Nama Produk</th>
         <th>Tgl Pesan</th>
+        <th>Ukuran (P x l)</th>
         <th>Jumlah</th>
+        <th>Total Bayar</th>
         <th>Dari</th>
         <th>Keterangan</th>
         <th>#</th>
@@ -19,15 +21,15 @@
                 ?>
                     <tr>
                         <td>
-                            <a title="Lihat Gambar File" href="<?php echo base_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar ?>" target="_blank">
-                                <img src="<?php echo site_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar; ?>" width="100px">
-                            </a>
+                          <img src="<?php echo site_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar; ?>" width="100px">
                         </td>  
                         <td><?php echo $dt->no_transaksi; ?></td> 
                         <td><?php echo $dt->bahan; ?></td>                      
                         <td><?php echo $dt->nama_product; ?></td>                          
-                        <td><?php echo $dt->tgl_kirim ?></td>                      
-                        <td><?php echo $dt->jumlah ?></td>                      
+                        <td><?php echo $dt->tgl_kirim ?></td>
+                        <td><?php echo $dt->panjang ." x ".$dt->lebar ?></td>  
+                        <td><?php echo $dt->jumlah ?></td>  
+                        <td><?php echo "Rp. ".number_format($dt->panjang * $dt->lebar * $dt->harga * $dt->jumlah)?></td>                     
                         <td><?php echo $dt->nama_user_kantor ?> (<?php echo $dt->nama_kantor ?>)</td>                      
                         <td><?php echo $dt->keterangan ?></td>                      
                         <td>
@@ -36,6 +38,10 @@
                             </button>
                             <a class="btn btn-info" title="Lihat Gambar File" href="<?php echo base_url('assets/image/filekirim/') ?><?php echo $dt->nama_gambar ?>" target="_blank">
                                 <li class="fa fa-eye"></li>
+                            </button>
+                            <a class="btn btn-danger" title="Batalkan Antrian Cetak" onclick="decline(<?php echo $dt->id_transaksi; ?>)">
+                                <li class="fa fa-remove">
+                                </li>
                             </a>
                             <?php if (!empty($dt->nama_file)): ?>
                                 <a class="btn btn-primary" title="Download Master File" href="<?php echo base_url('assets/image/filekirim/') ?><?php echo $dt->nama_file ?>">
@@ -63,6 +69,26 @@
         loading(true);
         $.ajax({
             url: url+'vendor/pesanan/prosestransaksi/'+idTransaksi,
+            type: 'GET',
+            dataType: 'JSON',
+        })
+        .done(function(e) {
+            console.log(e);
+        })
+        .fail(function() {
+            console.log("error");
+        })
+        .always(function() {
+            loadPesananMasuk();
+            console.log("complete");
+        });
+        
+    }
+
+    function decline(idTransaksi) {
+        loading(true);
+        $.ajax({
+            url: url+'vendor/pesanan/declineTransaksi/'+idTransaksi,
             type: 'GET',
             dataType: 'JSON',
         })

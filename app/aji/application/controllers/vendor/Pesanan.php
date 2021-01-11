@@ -141,6 +141,37 @@ class Pesanan extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function declineTransaksi($idTransaksi)
+	{
+		$up = array(
+			'status' 			=> 'Ditolak Vendor'
+		);	
+		
+		if ($this->VendorPesananModel->updatePesanan($idTransaksi, $up)) {
+			$data = array(
+				'result' => true, 
+				'message' => 'Berhasil update Pemesanan', 
+			);
+
+			// kirim notif ke kantor pemesan
+			$kantor = $this->Kantor_Model->getKantorDetail();
+			$detailTransaksi = $this->TransaksiModel->getTransaksiById($idTransaksi);
+
+			$this->kirimEmail(
+				$kantor->email_kantor,
+				$up['status'],
+				'Pemesanan pada nomor Transaksi <b>'.$detailTransaksi->no_transaksi.'</b> Telah '.$up['status'].'.<br><br>'.
+				'Terimakasih<br>'.$this->session->userdata('namaUser')
+			);
+		}else{
+			$data = array(
+				'result' => false, 
+				'message' => 'Gagal update Pemesanan', 
+			);
+		}
+		echo json_encode($data);
+	}
+
 	// set status selesai cetak, dan kirim notifikasi ke kantor via email
 	public function settunggupembayaran($idTransaksi)
 	{

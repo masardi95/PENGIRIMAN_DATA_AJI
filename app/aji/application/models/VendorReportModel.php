@@ -18,7 +18,7 @@ class VendorReportModel extends CI_Model {
 		  sum(case(status) when 'Dikirim' then 1 else 0 end) as pending, 
 		  count(id_transaksi ) as jum_transaksi, sum(case(status) when 'Diterima Vendor' then 1 else 0 end) as diterima,
 		  sum(case(status) when 'Selesai' then 1 else 0 end) as selesai, sum(jumlah) as satuan,
-		  sum(harga*jumlah) as tot_anggaran");		
+		  sum(harga*jumlah*panjang*lebar) as tot_anggaran");		
 		$this->db->from('transaksi');
 		$this->db->where('id_vendor', $idVendor);
 		$this->db->group_by('kirim');
@@ -48,7 +48,7 @@ class VendorReportModel extends CI_Model {
 		  sum(case(status) when 'Dikirim' then 1 else 0 end) as pending, 
 		  count(id_transaksi ) as jum_transaksi, sum(case(status) when 'Diterima Vendor' then 1 else 0 end) as diterima, 
 		  sum(case(status) when 'Selesai' then 1 else 0 end) as selesai, sum(jumlah) as satuan,
-		  sum(harga*jumlah) as tot_anggaran");			
+		  sum(harga*jumlah*panjang*lebar) as tot_anggaran");			
 		$this->db->from('transaksi');
 		$this->db->where('id_vendor', $idVendor);
 		$this->db->group_by('kirim');

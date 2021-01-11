@@ -36,7 +36,6 @@ class Transaksi extends CI_Controller {
 	/********************************************** KIRIM ************************************************/
 	/*****************************************************************************************************/
 
-	// tampilan kirim file
 	public function kirim()
 	{
 		$data = array(
@@ -48,27 +47,33 @@ class Transaksi extends CI_Controller {
 		$this->load->view('admin/transaksi/kirim', $data);
 	}
 
-	// insert transaksi barang baru dari kantor ke vendor
 	public function doKirim()
 	{
 		$error = array();
 		$idTransaksi	= $this->input->post('idTransaksi');
 		$idVendor 		= $this->input->post('emailVendor');
+
+		$panjang = $this->input->post('panjang');
+		$lebar = $this->input->post('lebar');
+		$jumlah = $this->input->post('jumCetak');
+
 		$isi = array(
 			// 'id_kantor' 		=> $this->input->post('idKantor'), 
 			'id_user_kantor'	=> $this->session->userdata('idUser'), 
 			'id_vendor' 		=> $idVendor, 
 			'id_product' 		=> $this->input->post('prodVendor'), 
-			'jumlah' 			=> $this->input->post('jumCetak'),
+			'jumlah' 			=> $jumlah,
 			'keterangan'	 	=> $this->input->post('ket'),
 			'link_external'	 	=> $this->input->post('linkExternal'),
-			'status'			=> 'Dikirim'
+			'status'			=> 'Dikirim',
+			'panjang'			=> $panjang,
+			'lebar'				=> $lebar,
 		);
 
 		// konfig file upload
 		$conFile['upload_path'] 		= './assets/image/filekirim/';
 		$conFile['allowed_types'] 		= '*';
-		$conFile['max_size']  			= '5000';
+		$conFile['max_size']  			= '10280';
 		$conFile['file_name']			= $this->session->userdata('username'). substr(rand(), 0,5). date("dmY");
 		$cek = $this->load->library('upload', $conFile);
 
@@ -83,7 +88,7 @@ class Transaksi extends CI_Controller {
 		}
 
 		$conGambar['allowed_types'] 	= 'gif|jpg|jpeg|png';
-		$conGambar['max_size']  		= '1024';
+		$conGambar['max_size']  		= '10280';
 		$conGambar['file_name']			= $this->session->userdata('username'). substr(rand(), 0,5). date("dmY");
 		$cek = $this->load->library('upload', $conGambar);
 		// cek keberadaan logo
@@ -98,7 +103,12 @@ class Transaksi extends CI_Controller {
 		}
 		// ambil harga produk
 		$product = $this->TransaksiModel->getProductById($this->input->post('prodVendor'));
-		$isi['harga'] = $product->harga;
+		$harga = $product->harga;
+
+		$totalBayar = $panjang * $lebar * $jumlah * $harga;
+
+		$isi['harga'] = $harga;
+		$isi['total_bayar'] = $totalBayar;
 
 		if ($idTransaksi == '') {
 			// isi ke transaksi
@@ -112,32 +122,30 @@ class Transaksi extends CI_Controller {
 					'message' => 'Berhasil Insert Transaksi', 
 				);
 
-				// kirim ke email vendor  .......................
-				// kirim dengan file gambar
-				if (!empty($isi['nama_file'])) {
-					$this->kirimEmail(
-						$detailVendor->email_vendor,
-						'Order "'.$isi['keterangan'].'" dengan nomor transaksi <b>'.$isi['no_transaksi'].'</b>, <br>'.
-						'<a href="'. base_url('assets/image/filekirim/').$isi['nama_gambar'].'">Link Gambar</a>, <br>'.
-						'<a href="'. base_url('assets/image/filekirim/').$isi['nama_file'].'">Link File</a>, <br>'.
-						'<br><br>'.
-						'Terimakasih <br>'.
-						''.$this->session->userdata('namaUser'),
-						'Order Baru'
-					);
-				}else{
-					// kirim dengan link external
-					$this->kirimEmail(
-						$detailVendor->email_vendor,
-						'Order "'.$isi['keterangan'].'" dengan nomor transaksi <b>'.$isi['no_transaksi'].'</b>, <br>'.
-						'<a href="'. base_url('assets/image/filekirim/').$isi['nama_gambar'].'">Link Gambar</a>, <br>'.
-						'<a href="'. $isi['link_external'].'">Link File</a>, <br>'.
-						'<br><br>'.
-						'Terimakasih <br>'.
-						''.$this->session->userdata('namaUser'),
-						'Order Baru'
-					);
-				}
+				// kirim ke email vendor 
+				// if (!empty($isi['nama_file'])) {
+				// 	$this->kirimEmail(
+				// 		$detailVendor->email_vendor,
+				// 		'Order "'.$isi['keterangan'].'" dengan nomor transaksi <b>'.$isi['no_transaksi'].'</b>, <br>'.
+				// 		'<a href="'. base_url('assets/image/filekirim/').$isi['nama_gambar'].'">Link Gambar</a>, <br>'.
+				// 		'<a href="'. base_url('assets/image/filekirim/').$isi['nama_file'].'">Link File</a>, <br>'.
+				// 		'<br><br>'.
+				// 		'Terimakasih <br>'.
+				// 		''.$this->session->userdata('namaUser'),
+				// 		'Order Baru'
+				// 	);
+				// }else{
+				// 	$this->kirimEmail(
+				// 		$detailVendor->email_vendor,
+				// 		'Order "'.$isi['keterangan'].'" dengan nomor transaksi <b>'.$isi['no_transaksi'].'</b>, <br>'.
+				// 		'<a href="'. base_url('assets/image/filekirim/').$isi['nama_gambar'].'">Link Gambar</a>, <br>'.
+				// 		'<a href="'. $isi['link_external'].'">Link File</a>, <br>'.
+				// 		'<br><br>'.
+				// 		'Terimakasih <br>'.
+				// 		''.$this->session->userdata('namaUser'),
+				// 		'Order Baru'
+				// 	);
+				// }
 				redirect('transaksi/kirim');
 			}else{
 				$data = array(
@@ -164,13 +172,11 @@ class Transaksi extends CI_Controller {
 		echo json_encode($isi);
 	}
 
-	// ambil transaksi berdasarkan id nya
 	public function getTransaksiById($id)
 	{
 		echo json_encode($this->TransaksiModel->getTransaksiById($id));
 	}
 
-	// tampilan design sedang dalam proses vendor
 	public function onprog()
 	{
 		$data = array(
@@ -182,7 +188,6 @@ class Transaksi extends CI_Controller {
 		$this->load->view('admin/transaksi/onprog', $data);
 	}
 
-	// tampilan transaksi sudah selesai
 	public function done()
 	{
 		$data = array(
@@ -194,7 +199,7 @@ class Transaksi extends CI_Controller {
 		$this->load->view('admin/transaksi/transaksidone', $data);
 	}
 
-	// ambil semua transaksi selesai dari database
+
 	public function fetchAllTransaksiSelesai()
 	{
 		$data = array('dataTransaksi' => $this->TransaksiModel->fetchAllTransaksiSelesai() );
@@ -203,7 +208,6 @@ class Transaksi extends CI_Controller {
 	}
 
 
-	// ambil semua transaksi belum selesai dari database
 	public function fetchAllTransaksiBelumSelesai()
 	{
 		$data = array('dataTransaksi' => $this->TransaksiModel->fetchAllTransaksiBelumProgres() );
@@ -211,7 +215,6 @@ class Transaksi extends CI_Controller {
 		$this->load->view('admin/transaksi/ajax_load_transaksi', $data);
 	}
 
-	// ambil semua transaksi yang sedang diproses vendor dari database
 	public function fetchAllProgTransaksi()
 	{
 		$data = array('dataTransaksi' => $this->TransaksiModel->fetchAllProgTransaksi() );
@@ -219,7 +222,7 @@ class Transaksi extends CI_Controller {
 		$this->load->view('admin/transaksi/ajax_load_transaksi_progres', $data);
 	}
 
-	// upload bukti pembayaran
+
 	public function upBukti()
 	{
 		$idTransaksi = $this->input->post('idTransaksi');
@@ -250,7 +253,7 @@ class Transaksi extends CI_Controller {
 				'message' => 'Berhasil Insert bukti', 
 			);
 			
-			// kirim ke notifikasi bukti pembayaran
+			// kirim ke email vendor 
 			$detailTransaksi 	= $this->TransaksiModel->getTransaksiById($idTransaksi);
 			$detailVendor	= $this->Mgtvendor_Model->getVendorById($detailTransaksi->id_vendor);
 			$this->kirimEmail(
@@ -272,19 +275,6 @@ class Transaksi extends CI_Controller {
 		echo json_encode($isi);
 	}
 
-	public function cekEmail()
-	{
-		$this->kirimEmail(
-			'gpoex.mas@gmail.com',
-			'Nomor Transaksi '.
-			'Terimakasih <br>'.
-			''.$this->session->userdata('namaUser'),
-			'Pembayaran Order'
-		);
-	}
-
-
-	// proses kirim email ke vendor
  	public function kirimEmail($emailTujuan, $pesan, $subject)
  	{
  		// PHPMailer object
@@ -318,10 +308,10 @@ class Transaksi extends CI_Controller {
 
 	      // Send email
 	      if(!$mail->send()){
-	          echo 'Message could not be sent.';
-	          echo 'Mailer Error: ' . $mail->ErrorInfo;
+	          // echo 'Message could not be sent.';
+	          // echo 'Mailer Error: ' . $mail->ErrorInfo;
 	      }else{
-	          echo 'Message has been sent';
+	          // echo 'Message has been sent';
 	      }
  	}
 

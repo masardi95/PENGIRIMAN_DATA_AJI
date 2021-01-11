@@ -118,8 +118,9 @@ class Report extends CI_Controller {
 					'jumlah' 		=> $valHari->jumlah,
 					'keterangan' 	=> $valHari->keterangan,
 					'harga' 		=> $valHari->harga,
-					'totalBayar'	=> 'Rp. '.number_format(($valHari->jumlah*$valHari->harga)),
-					'nTotalBayar'	=> $valHari->jumlah*$valHari->harga,
+					'totalBayar'	=> 'Rp. '. number_format(($valHari->jumlah*$valHari->harga*$valHari->panjang*$valHari->lebar)),
+					'nTotalBayar'	=> $valHari->jumlah*$valHari->harga*$valHari->panjang*$valHari->lebar,
+					'ukuran'		=> $valHari->panjang.' x '.$valHari->lebar
 				);
 			}
 		}
